@@ -11,9 +11,33 @@ $apps = [ordered]@{
     "melonDS.melonDS"         = "Nintendo DS"
     "JeffreyPfau.mGBA"        = "Game Boy Advance"
 }
+
+# Repli versions portables (telechargeables sans droits admin) si winget echoue
+# (le paquet winget de Dolphin pointe vers un miroir 403 ; l'installateur mGBA exige l'UAC).
+$portable = @{
+    "DolphinEmulator.Dolphin" = @{ url = "https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-x64.7z"
+                                   dest = "Dolphin" }
+    "JeffreyPfau.mGBA"        = @{ url = "https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-win64.7z"
+                                   dest = "mGBA" }
+}
+function Install-Portable($id) {
+    $p = $portable[$id]
+    $tmp = Join-Path $env:TEMP ("nk-" + (Split-Path -Leaf $p.url))
+    Write-Host "    repli version portable : $($p.url)"
+    Invoke-WebRequest -Uri $p.url -OutFile $tmp
+    $dest = Join-Path $env:LOCALAPPDATA ("Programs\" + $p.dest)
+    New-Item -ItemType Directory -Force -Path $dest | Out-Null
+    tar -xf $tmp -C $dest
+    Remove-Item $tmp -Force
+    Write-Host "    -> installe dans $dest"
+}
+
 foreach ($id in $apps.Keys) {
     Write-Host "    -> $id ($($apps[$id]))"
     winget install -e --id $id --accept-package-agreements --accept-source-agreements
+    if (($LASTEXITCODE -ne 0) -and $portable.Contains($id)) {
+        Install-Portable $id
+    }
 }
 
 Write-Host "==> [2/3] Dossiers de jeux"
