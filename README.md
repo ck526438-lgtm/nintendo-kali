@@ -14,6 +14,20 @@ Script d'installation d'un pack retro Nintendo complet sur **Kali Linux / Debian
 
 Tout passe par **Flatpak**, sans ajouter de repos exotiques qui pourraient casser Kali.
 
+## Jouer au clavier 🌨️
+
+`configure-keyboard.sh` est lance automatiquement par l'installeur (et relancable a volonte). Il ecrit un bloc `NINTENDO-KALI KEYBOARD` dans la config RetroArch avec ce mappage :
+
+| Touche | Fonction | | Touche | Fonction |
+|---|---|---|---|---|
+| Flèches | Direction / stick gauche | | Q / E | L / R |
+| X | Bouton A | | T / Y | L2 / R2 |
+| Z | Bouton B | | Entrée | Start |
+| A / S | Y / X | | Espace | Select |
+| I / J / K / M | C-stick N64 | | F1 | Menu RetroArch |
+
+Pour Dolphin (GameCube/Wii) et melonDS (DS), le script affiche le meme tableau a reproduire dans leurs menus de configuration des commandes. Les manettes branchees restent prioritaires : RetroArch les bascule automatiquement.
+
 ## Installation
 
 ```bash
