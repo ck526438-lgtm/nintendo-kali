@@ -1,6 +1,7 @@
-# Nintendo sur Kali Linux 🎮
+# Nintendo sur ton ordinateur 🎮
 
-Script d'installation d'un pack retro Nintendo complet sur **Kali Linux / Debian** (PC dédié ou double boot).
+Installateurs d'un pack retro Nintendo complet pour **Linux (Kali/Debian), Windows et macOS** :
+NES, SNES, Game Boy, GBA, N64, GameCube, Wii et DS — avec le **clavier déjà configuré**.
 
 ## Consoles couvertes
 
@@ -30,13 +31,28 @@ Pour Dolphin (GameCube/Wii) et melonDS (DS), le script affiche le meme tableau a
 
 ## Installation
 
+**Linux (Kali / Debian)** — PC dédié ou double boot :
 ```bash
 git clone https://github.com/ck526438-lgtm/nintendo-kali.git
 cd nintendo-kali
 bash install-nintendo-kali.sh
 ```
 
-Lance le script avec ton utilisateur normal (pas root), pas besoin de `chmod` au préalable.
+**Windows 10/11** — via winget (PowerShell) :
+```powershell
+git clone https://github.com/ck526438-lgtm/nintendo-kali.git
+cd nintendo-kali
+powershell -ExecutionPolicy Bypass -File install-nintendo-windows.ps1
+```
+
+**macOS** — via Homebrew :
+```bash
+git clone https://github.com/ck526438-lgtm/nintendo-kali.git
+cd nintendo-kali
+bash install-nintendo-macos.sh
+```
+
+Les trois installateurs écrivent le même bloc `NINTENDO-KALI KEYBOARD` dans la config RetroArch (rejouable à volonté, sans doublons) et créent les dossiers `~/Jeux-Nintendo/`.
 
 ## Après l'installation
 
